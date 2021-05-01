@@ -10,9 +10,14 @@ def hashToNumber(txhash, total):
     result = int(txhash, 16) % total
     return result
 
+def getLatestBlock():
+    url = "https://blockchain.info/latestblock"
+    params = dict()
+    resp = requests.get(url=url, params=params, timeout=5)
+    data = json.loads(resp.text)
+    return data["hash"]
 
 def getBlocktxs(blockhash, number, total, startnum):
-    #url = "https://blockexplorer.com/api/block/" + blockhash
     url = "https://blockchain.info/rawblock/" + blockhash
     params = dict()
 
@@ -40,6 +45,12 @@ def main():
         number = sys.argv[2]
         total= sys.argv[3]
         startnum = sys.argv[4]
+        getBlocktxs(blockhash, int(number), int(total), int(startnum))
+    elif len(sys.argv) == 4:
+        blockhash = getLatestBlock()
+        number = sys.argv[1]
+        total= sys.argv[2]
+        startnum = sys.argv[3]
         getBlocktxs(blockhash, int(number), int(total), int(startnum))
     else:
         print ("usage: ./lotteryResult.py blockhash number total startnum")

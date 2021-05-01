@@ -14,6 +14,8 @@
 * total 全部发出的奖券数量，比如 59391 张
 * startnum 奖券号码起始值，为了奖券号码好看，一般用一个比较大的数值做为开始，我们一般采用 1000000
 
+如果没提供blockhash参数，就自动使用最新一个block抽奖。
+
 例子：
 
 ```
@@ -26,6 +28,16 @@ result 3 is 1010464
 result 4 is 1047703
 result 5 is 1033045
 ......
+```
+
+```
+./lotteryResult.py 5 100 1000000
+1439 Transactions for 5 results.
+result 0 is 1000093
+result 1 is 1000087
+result 2 is 1000045
+result 3 is 1000038
+result 4 is 1000010
 ```
 
 以上号码即为各中奖结果
